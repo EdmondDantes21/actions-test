@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - Dockerfile
-
 env:
   GHCR_REPO: ghcr.io/${{ github.repository }}
 
@@ -40,6 +37,7 @@ jobs:
           images: ${{ env.GHCR_REPO }}
           tags: |
             type=semver,pattern={{version}}
+            type=ref,event=branch
 
       - name: Build and push multi-arch image
         uses: docker/build-push-action@v5
